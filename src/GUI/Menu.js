@@ -38,7 +38,7 @@ export function CreateMenu() {
                 height: 10vh;" 
             src="${LogoData}">
             <h1 style="
-                font-size: 4vh;
+                font-size: 8vh;
             ">Fracticle Client</h1>
         </div>
         <div style="
