@@ -34,8 +34,8 @@ export function CreateMenu() {
             margin-bottom: 1vh;
         >
             <img style="
-                width: 20vh; 
-                height: 20vh;" 
+                width: 50px; 
+                height: 50px;" 
             src="${LogoData}">
             <h1 style="
                 font-size: 4vh;
