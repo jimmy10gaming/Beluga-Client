@@ -100,15 +100,11 @@ function EnableToggle(name) {
 
 function SetCorrectToggle(name) {
     if (ParsedLSData) ParsedLSData.forEach((e) => {
-        if (e.name == name) {
+        if (e.name === name) {
           const toggleElement = document.getElementById(`SCMM-${name}-Toggle`);
           if (toggleElement) {
-              toggleElement.style.backgroundColor = e.enabled
-                  ? "rgba(0, 255, 0, 0.25)"
-                  : "rgba(255, 0, 0, 0.25)";
-              toggleElement.querySelector("p").innerHTML = e.enabled
-                  ? "ENABLED"
-                  : "DISABLED";
+              toggleElement.style.backgroundColor = e.enabled ? "rgba(0, 255, 0, 0.25)" : "rgba(255, 0, 0, 0.25)";
+              toggleElement.querySelector("p").innerHTML = e.enabled ? "ENABLED" : "DISABLED";
           }
       }
     });
