@@ -39,7 +39,7 @@ export function CreateMenu() {
             src="${LogoData}">
             <h1 style="
                 font-size: 4vh;
-            ">Solar Client</h1>
+            ">Fracticle Client</h1>
         </div>
         <div style="
             display: flex;
