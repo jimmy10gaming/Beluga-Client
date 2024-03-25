@@ -9,7 +9,7 @@ export function StartupModules() {
   if (!localStorage.getItem("SCMM-MODS"))
     localStorage.setItem(
       "SCMM-MODS",
-      '[{"name": "Fullbright","enabled": false},{"name": "Keystrokes","enabled": false}]'
+      '[{"name": "Fullbright","enabled": false},{"name": "Keystrokes","enabled": false},{"name": "Armorhud","enabled": false}]'
     );
 
   if (ParsedLSData) ModulesList.forEach((Module) => {
