@@ -34,11 +34,11 @@ export function CreateMenu() {
             margin-bottom: 1vh;
         >
             <img style="
-                width: 10vh; 
-                height: 10vh;" 
+                width: 20vh; 
+                height: 20vh;" 
             src="${LogoData}">
             <h1 style="
-                font-size: 8vh;
+                font-size: 4vh;
             ">Fracticle Client</h1>
         </div>
         <div style="
