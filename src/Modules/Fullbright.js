@@ -15,12 +15,3 @@ export function FullbrightOff() {
     ModAPI.blocks.air.reload();
   }, 5000);
 }
-
-ModAPI.require("player");
-
-let armorStats = {
-  helmet: 0,
-  chestplate: 0,
-  leggings: 0,
-  boots: 0
-};
