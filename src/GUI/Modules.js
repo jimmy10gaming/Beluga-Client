@@ -1,7 +1,8 @@
 const { ModulesList } = require("../ModulesList");
 const Keystrokes = require("../Modules/Keystrokes");
-const Fullbright = require("../Modules/Fullbright");
 const Armorhud = require("../Modules/Armorhud");
+const Fullbright = require("../Modules/Fullbright");
+
 
 let BareLocalStorageData = localStorage.getItem("SCMM-MODS");
 let ParsedLSData = JSON.parse(BareLocalStorageData);
