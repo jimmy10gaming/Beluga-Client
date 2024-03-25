@@ -1,6 +1,6 @@
 let int;
 
-export function FullbrightOn() {
+export function ArmorhudOn() {
   clearInterval(int);
   int = setInterval(function () {
     ModAPI.blocks.air.lightValue = 10;
@@ -10,7 +10,7 @@ export function FullbrightOn() {
   }, 5000);
 }
 
-export function FullbrightOff() {
+export function ArmorhudOff() {
   clearInterval(int);
   int = setInterval(function () {
     ModAPI.blocks.air.lightValue = 1;
