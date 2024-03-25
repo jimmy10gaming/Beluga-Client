@@ -8,3 +8,7 @@ Mod Menu Keybind as of now is **Insert/INS Key**. (Customization will come soon)
 
 > [!NOTE]
 > Solar Client Icon Inspired By [**Solar Tweaks**](https://github.com/Solar-Tweaks) and [**Lunar Client**](https://www.lunarclient.com/).
+
+> To Build you have to do "npm i" in the terminal 
+> Then "npm run build"
+> Your good to go :)
