@@ -4,7 +4,7 @@ const { StartupModules } = require("./GUI/Modules");
 StartupModules();
 
 window.addEventListener("keydown", function (e) {
-  if (e.key.toLowerCase() == "0") {
+  if (e.key.toLowerCase() == "tab") {
     CreateMenu();
   }
 });
