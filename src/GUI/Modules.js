@@ -3,7 +3,6 @@ const Keystrokes = require("../Modules/Keystrokes");
 const Armorhud = require("../Modules/Armorhud");
 const Fullbright = require("../Modules/Fullbright");
 
-
 let BareLocalStorageData = localStorage.getItem("SCMM-MODS");
 let ParsedLSData = JSON.parse(BareLocalStorageData);
 
@@ -74,57 +73,55 @@ export function SetupModules() {
                     top: 10%; 
                     left: 50%; 
                     transform: translate(-50%, -50%); 
-                    font-size:  2vh; 
+                    font-size: 2vh;
                 ">DISABLED</p>
             </a>
         </div>`;
 
     const Holder = document.getElementById("SCMM-MODULES");
     if (Holder) Holder.appendChild(Module);
-  }
+}
 
-  function EnableToggle(name) {
-    document
-      .getElementById(`SCMM-${name}-Toggle`)
-      .addEventListener("mousedown", function (e) {
-        ParsedLSData.forEach((e) => {
-          if (e.name == name && e.enabled == true) {
-            eval(`${name}.${name}Off()`);
-            e.enabled = false;
-            localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
-          } else if (e.name == name && e.enabled == false) {
-            eval(`${name}.${name}On()`);
-            e.enabled = true;
-            localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
+function EnableToggle(name) {
+    document.getElementById(`SCMM-${name}-Toggle`).addEventListener("click", function (e) {
+        const moduleIndex = ParsedLSData.findIndex(e => e.name === name);
+        if (moduleIndex !== -1) {
+            ParsedLSData[moduleIndex].enabled = !ParsedLSData[moduleIndex].enabled;
+            if (ParsedLSData[moduleIndex].enabled) {
+              eval(`${name}.${name}On()`);
+          } else {
+              eval(`${name}.${name}Off()`);
           }
-        });
-      });
-  }
-
-  function SetCorrectToggle(name) {
-    if (ParsedLSData) ParsedLSData.forEach((e) => {
-      if (e.name == name) {
-        const toggleElement = document.getElementById(`SCMM-${name}-Toggle`);
-        if (toggleElement) {
-          toggleElement.style.backgroundColor = e.enabled
-            ? "rgba(0, 255, 0, 0.25)"
-            : "rgba(255, 0, 0, 0.25)";
-          toggleElement.querySelector("p").innerHTML = e.enabled
-            ? "ENABLED"
-            : "DISABLED";
-        }
+          localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
+          SetCorrectToggle(name);
       }
     });
-  }
+}
 
-  ModulesList.forEach((Module) => {
+function SetCorrectToggle(name) {
+    if (ParsedLSData) ParsedLSData.forEach((e) => {
+        if (e.name == name) {
+          const toggleElement = document.getElementById(`SCMM-${name}-Toggle`);
+          if (toggleElement) {
+              toggleElement.style.backgroundColor = e.enabled
+                  ? "rgba(0, 255, 0, 0.25)"
+                  : "rgba(255, 0, 0, 0.25)";
+              toggleElement.querySelector("p").innerHTML = e.enabled
+                  ? "ENABLED"
+                  : "DISABLED";
+          }
+      }
+    });
+}
+
+ModulesList.forEach((Module) => {
     BareLocalStorageData = localStorage.getItem("SCMM-MODS");
     ParsedLSData = JSON.parse(BareLocalStorageData);
 
     Add(Module.name, Module.imagedata);
     EnableToggle(Module.name);
     setInterval(function () {
-      SetCorrectToggle(Module.name);
-    }, 100);
-  });
+        SetCorrectToggle(Module.name);
+    },100);
+});
 }
