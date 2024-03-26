@@ -13,7 +13,7 @@ export function Init(name) {
         //start of the "enabled" stuff
         int = setInterval(() => {
       if (document.getElementById("SCMM-Keystrokes")) {
-        const XP = ModAPI.player.eXPerienceTotal();
+        const XP = ModAPI.player.experienceTotal();
            XP.forEach((Area) => {
           const element = document.getElementById(`${Area}Area`);
           if (element && XP[Area]) {
