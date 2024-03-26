@@ -1,7 +1,7 @@
-export function ArmorhudOn() {
+export function FullbrightOn() {
  console.log("Hey im working!");
 }
 
-export function ArmorhudOff() {
+export function FullbrightOff() {
 console.log("Hey Im Not Working :(");
 }
