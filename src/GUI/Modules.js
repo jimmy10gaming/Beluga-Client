@@ -1,6 +1,6 @@
 const { ModulesList } = require("../ModulesList");
 const Keystrokes = require("../Modules/Keystrokes");
-const Armorhud = require("../Modules/Armorhud");
+const Armorhud = require("../Modules/CPS");
 const Fullbright = require("../Modules/Fullbright");
 
 //i was here lol
@@ -12,7 +12,7 @@ export function StartupModules() {
   if (!localStorage.getItem("SCMM-MODS"))
     localStorage.setItem(
       "SCMM-MODS",
-      '[{"name": "Fullbright","enabled": false},{"name": "Armorhud","enabled": false},{"name": "Keystrokes","enabled": false}]'
+      '[{"name": "Fullbright","enabled": false},{"name": "CPS","enabled": false},{"name": "Keystrokes","enabled": false}]'
     );
 
   if (ParsedLSData) ModulesList.forEach((Module) => {
