@@ -41,21 +41,22 @@ export function CreateMenu() {
                 font-size: 4vh;
             ">Fracticle Client</h1>
         </div>
+        <input type="text" placeholder="Search Mods" style="margin-bottom :1 vh;">
         <div style="
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        flex-direction: row;
-        align-items: center;
-        height: fit-content;
-        width: 100%;
-        color: #fff;
-        gap: 1.5vw;
-        font-family: 'Minecraftia', sans-serif;" 
-    id="SCMM-MODULES"></div>
-    `;
-        document.body.appendChild(Holder);
-        Holder.appendChild(Menu);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            height: fit-content;
+            width: 100%;
+            color: #fff;
+            gap: 1.5vw;
+            font-family: 'Minecraftia', sans-serif;" 
+        id="SCMM-MODULES"></div>
+        `;
+    document.body.appendChild(Holder);
+    Holder.appendChild(Menu);
 
     SetupModules();
   } else {
