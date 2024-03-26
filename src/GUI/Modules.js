@@ -9,24 +9,19 @@ let BareLocalStorageData = localStorage.getItem("SCMM-MODS");
 let ParsedLSData = JSON.parse(BareLocalStorageData);
 
 export function StartupModules() {
-  if (!localStorage.getItem("SCMM-MODS")) {
+  if (!localStorage.getItem("SCMM-MODS"))
     localStorage.setItem(
       "SCMM-MODS",
       '[{"name": "Fullbright","enabled": false},{"name": "CPS","enabled": false},{"name": "Keystrokes","enabled": false}]'
     );
-  }
 
-  if (ParsedLSData) {
-    ModulesList.forEach((Module) => {
-      ParsedLSData.forEach((e) => {
-        if (e.name === Module.name && e.enabled === true) {
-          eval(`${Module.name}.${Module.name}On()`);
-        } else if (e.name === Module.name && e.enabled === false) {
-          eval(`${Module.name}.${Module.name}Off()`);
-        }
-      });
+  if (ParsedLSData) ModulesList.forEach((Module) => {
+    ParsedLSData.forEach((e) => {
+      if (e.name == Module.name && e.enabled == true) eval(`${Module.name}.${Module.name}On()`);
+      else if (e.name == Module.name && e.enabled == false)
+        eval(`${Module.name}.${Module.name}Off()`);
     });
-  }
+  });
 }
 
 export function SetupModules() {
@@ -51,7 +46,7 @@ export function SetupModules() {
                 top: 35%; 
                 left: 50%; 
                 transform: translate(-50%, -50%); 
-                font-size: 2vh;
+                font-size:  2vh;
                 width: 15vh; 
                 height: 15vh;" 
             src="${img}"/>
@@ -60,8 +55,9 @@ export function SetupModules() {
                 position: absolute; 
                 top: 62.5%; 
                 left: 50%; 
-                transform: translate(-50%, -50%); 
-                font-size: 1.5vh; 
+                transform: 
+                translate(-50%, -50%); 
+                font-size:  1.5vh; 
                 width: 100%; 
                 text-align: center;" 
             >${name}</h1>
@@ -79,35 +75,36 @@ export function SetupModules() {
                     top: 10%; 
                     left: 50%; 
                     transform: translate(-50%, -50%); 
-                    font-size: 2vh;">DISABLED</p>
+                    font-size:  2vh; 
+                ">DISABLED</p>
             </a>
         </div>`;
 
     const Holder = document.getElementById("SCMM-MODULES");
     if (Holder) Holder.appendChild(Module);
-}
+  }
 
-function EnableToggle(name) {
+  function EnableToggle(name) {
     document
       .getElementById(`SCMM-${name}-Toggle`)
       .addEventListener("mousedown", function (e) {
         ParsedLSData.forEach((e) => {
-          if (e.name === name && e.enabled === true) {
+          if (e.name == name && e.enabled == true) {
             eval(`${name}.${name}Off()`);
             e.enabled = false;
             localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
-          } else if (e.name === name && e.enabled === false) {
+          } else if (e.name == name && e.enabled == false) {
             eval(`${name}.${name}On()`);
             e.enabled = true;
             localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
           }
         });
       });
-}
+  }
 
-function SetCorrectToggle(name) {
+  function SetCorrectToggle(name) {
     if (ParsedLSData) ParsedLSData.forEach((e) => {
-      if (e.name === name) {
+      if (e.name == name) {
         const toggleElement = document.getElementById(`SCMM-${name}-Toggle`);
         if (toggleElement) {
           toggleElement.style.backgroundColor = e.enabled
@@ -119,9 +116,9 @@ function SetCorrectToggle(name) {
         }
       }
     });
-}
+  }
 
-ModulesList.forEach((Module) => {
+  ModulesList.forEach((Module) => {
     BareLocalStorageData = localStorage.getItem("SCMM-MODS");
     ParsedLSData = JSON.parse(BareLocalStorageData);
 
@@ -129,5 +126,6 @@ ModulesList.forEach((Module) => {
     EnableToggle(Module.name);
     setInterval(function () {
       SetCorrectToggle(Module.name);
-    },100);
-})};
+    }, 100);
+  });
+}
