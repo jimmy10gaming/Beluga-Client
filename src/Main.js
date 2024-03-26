@@ -5,6 +5,6 @@ StartupModules();
 
 window.addEventListener("keydown", function (e) {
   if (e.key === ".") {
-    CreateMenu(e);
+    CreateMenu();
   }
-})
+});

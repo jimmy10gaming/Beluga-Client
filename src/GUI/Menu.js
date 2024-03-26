@@ -1,10 +1,9 @@
-// Updated clickgui.js - CreateMenu function modified to accept the event parameter for opening the menu
 const { SetupModules } = require("./Modules");
 const { LogoData } = require("../ModulesList");
 
 let isMenuOpen = false;
 
-export function CreateMenu(e) {
+export function CreateMenu() {
     if (!isMenuOpen) {
         isMenuOpen = true;
         const Holder = document.createElement("div");
