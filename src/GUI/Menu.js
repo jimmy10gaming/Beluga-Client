@@ -41,7 +41,7 @@ export function CreateMenu() {
                 font-size: 4vh;
             ">Fracticle Client</h1>
         </div>
-        <input type="text" placeholder="Search Mods" style="margin-bottom :1 vh;">
+        <input type="text" placeholder="Search Mods" style="margin-bottom :50 vh;">
         <div style="
         display: flex;
         justify-content: center;
