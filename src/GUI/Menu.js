@@ -58,7 +58,6 @@ export function CreateMenu() {
         `;
         document.body.appendChild(Holder);
         Holder.appendChild(Menu);
-        SetupModules();
 
     SetupModules();
   } else {
