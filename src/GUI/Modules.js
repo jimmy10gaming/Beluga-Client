@@ -2,6 +2,7 @@ const { ModulesList } = require("../ModulesList");
 const Keystrokes = require("../Modules/Keystrokes"); 
 const Fullbright = require("../Modules/Fullbright");
 const XpHud = require("../Modules/XpHud");
+const Spamexp = require ("../Modules/Spamexp")
 // IF YOU ADD YOUR OWN MAKE SURE TO REQUIRE THEM HOW YOU NAMED IT IN THE "ModulesList.js" FILE!!!
 // Example: const CPS = require("../Modules/scriptnamecanbewhatever")
 
