@@ -1,36 +1,39 @@
-let int;
-
 export function Init(name) {
     const Data = JSON.parse(localStorage.getItem("SCMM-MODS"));
     const ModuleIndex = Data.findIndex((e) => e.name === name);
-    const XpHud = document.getElementById("SCMM-XpHud");
 
     if (ModuleIndex !== 1 && !Data[ModuleIndex].enabled) {
-        int = setInterval(() => {
-            if (document.getElementById("SCMM-Keystrokes")) {
-                const playerXP = ModAPI.player.experience;
-                playerXP.forEach((Area) => {
-                    const element = document.getElementById(`${Area}Area`);
-                    if (element && playerXP[Area]) {
-                        element.style.color = "black";
-                        element.style.background = "rgba(255, 255, 255, 0.5)";
-                    } else {
-                        element.style.color = "white";
-                        element.style.background = "rgba(0, 0, 0, 0.5)";
-                    }
-                });
-            }
-        }, 10);
+        // Minimap Mod functionality
+        ModAPI.require("player");
+        ModAPI.require("GlStateManager");
+        ModAPI.require("ScaledResolution");
 
-        const XP = document.createElement("div");
-        XP.id = "SCMM-XpHud";
-        XP.style.cssText = `font-size: 4vh;transform: translate(200px, -173px);display: grid;width: fit-content;height: fit-content;position: absolute;right: 0;bottom: 0;grid-template-areas: ". XP ." "Percent Needed";gap: 5px;`;
-        XP.innerHTML = `<div id="XPMaxAndTotal" style="border-radius: 1vh;min-height: 6vh;min-width: 6vh;display: flex;justify-content: center;align-items: center;font-family: 'Minecraftia';grid-area: XP;">XP amount/XP Total</div>
-        <div id="Percent" style="border-radius: 1vh;min-height: 6vh;min-width: 6vh;display: flex;justify-content: center;align-items: center;font-family: 'Minecraftia';grid-area: Percent;">Percent</div>
-        <div id="Needed" style="border-radius: 1vh;min-height: 6vh;min-width: 6vh;display: flex;justify-content: center;align-items: center;font-family: 'Minecraftia';grid-area: Needed;">Needed</div>`;
-        document.body.appendChild(XP);
+        // Toggle variable to enable/disable the minimap
+        let isMinimapEnabled = true;
+
+        ModAPI.addEventListener("sendchatmessage", function (event) {
+            if (isMinimapEnabled) {
+                // Minimap rendering code here
+                const player = ModAPI.player;
+                const resolution = new ModAPI.ScaledResolution();
+                const width = resolution.getScaledWidth();
+                const height = resolution.getScaledHeight();
+
+                ModAPI.GlStateManager.pushMatrix();
+                ModAPI.GlStateManager.translate(10, height - 10, 0);
+                // Render the minimap here using ModAPI functions
+                ModAPI.GlStateManager.popMatrix();
+            }
+        });
+
+        // Add a function to toggle the minimap
+        function ToggleMinimap() {
+            isMinimapEnabled = !isMinimapEnabled;
+            console.log(`Minimap is now ${isMinimapEnabled ? 'enabled' : 'disabled'}`);
+        }
     } else {
-        if (int) clearInterval(int);
-        if (XpHud) XpHud.remove();
+        // Disable the minimap
+        let isMinimapEnabled = false;
+        console.log("Disabled Mod");
     }
 }
