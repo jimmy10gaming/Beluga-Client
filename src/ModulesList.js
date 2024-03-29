@@ -13,7 +13,7 @@ export let ModulesList = [
   },
   {
     name: "Fullbright",
-    imagedata: Logo,
+    imagedata: Fullbrightimg,
   },
   {
     name: "XpHud",
