@@ -6,7 +6,7 @@ export function Init(name) {
 
 ModAPI.require('player')
 
-let songplayer = new Audio('https://files.catbox.moe/k4j25x.mp3')
+let songplayer = new Audio('https://youtu.be/9x_h9DiA5vY')
 songplayer.volume = 0.1
 
 ModAPI.addEventListener('sendchatmessage', function(e) {
