@@ -13,5 +13,5 @@ Mod Menu Keybind as of now is **Insert/INS Key**. (Customization will come soon)
 > [Then "npm run build"]
 > [Your good to go :)]
 
->[!New!]
-> To Add A Mod Do ```node createModule.js {ModuleName}``` 
+>[!Instructions!]
+> To Make Your Mod [Click Here](/workspaces/Solar-Client/CreateMod)
