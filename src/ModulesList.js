@@ -9,7 +9,7 @@ export const LogoData = Logo;
 export let ModulesList = [
   {
     name: "Keystrokes",
-    imagedata: Logo,
+    imagedata: Keystrokesimg,
   },
   {
     name: "Fullbright",
