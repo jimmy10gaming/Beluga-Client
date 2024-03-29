@@ -19,8 +19,9 @@ export function Init(name) {
                 msg: `You died at coordinates: X: ${x}, Y: ${y}, Z: ${z}`
             });
         });
-        
+
     } else {
         console.log("Disabled Mod");
     }
 }
+

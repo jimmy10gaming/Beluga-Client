@@ -3,25 +3,9 @@ const Keystrokes = require("../Modules/Keystrokes");
 const Fullbright = require("../Modules/Fullbright");
 const XpHud = require("../Modules/XpHud");
 const MangaFont = require ("../Modules/MangaFont")
-// IF YOU ADD YOUR OWN MAKE SURE TO REQUIRE THEM HOW YOU NAMED IT IN THE "ModulesList.js" FILE!!!
-// Example: const CPS = require("../Modules/scriptnamecanbewhatever")
-
-let BareLocalStorageData = localStorage.getItem("SCMM-MODS");
-let ParsedLSData = JSON.parse(BareLocalStorageData);
-
-export function StartupModules () {
-  //if (!BareLocalStorageData) {
-    let mods = [];
-    ModulesList.forEach((Module) => { mods.push({ name: Module.name, enabled: false });})
-    localStorage.setItem("SCMM-MODS", JSON.stringify(mods));
-  //}
-
-  // Cant get this to work so womp womp for now
-  // if (ParsedLSData) ModulesList.forEach((Module) => { if (ParsedLSData.find((e) => e.name === Module.name)) eval(`${Module.name}.Init("${Module.name}")`); });
-}
 
 export function SetupModules() {
-  function Add(name, img) {
+  function Add(name, img, initFunction, cleanupFunction) {
     const Module = document.createElement("div");
 
     Module.innerHTML = `
@@ -36,24 +20,25 @@ export function SetupModules() {
 
     const Holder = document.getElementById("SCMM-MODULES");
     if (Holder) Holder.appendChild(Module);
-  }
 
-  function EnableToggle(name) {
-    document.getElementById(`SCMM-${name}-Toggle`).addEventListener("mousedown", function (e) {
+    const Toggle = document.getElementById(`SCMM-${name}-Toggle`);
+    Toggle.addEventListener("mousedown", function (e) {
       const i = ParsedLSData.findIndex((e) => e.name === name);
-
       if (i !== -1) {
         ParsedLSData[i].enabled = !ParsedLSData[i].enabled;
-        eval(`${name}.Init("${name}")`);
-
+        if (ParsedLSData[i].enabled) {
+          initFunction();
+        } else {
+          cleanupFunction();
+        }
         localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
+        SetCorrectToggle(name);
       }
-    })
+    });
   }
 
   function SetCorrectToggle(name) {
     const i = ParsedLSData.findIndex((e) => e.name === name);
-
     if (i !== -1) {
       const Toggle = document.getElementById(`SCMM-${name}-Toggle`);
       if (Toggle) {
@@ -63,14 +48,16 @@ export function SetupModules() {
     }
   }
 
+  let BareLocalStorageData = localStorage.getItem("SCMM-MODS");
+  let ParsedLSData = JSON.parse(BareLocalStorageData);
+
+  if (!ParsedLSData) {
+    ParsedLSData = ModulesList.map((Module) => ({ name: Module.name, enabled: false }));
+    localStorage.setItem("SCMM-MODS", JSON.stringify(ParsedLSData));
+  }
+
   ModulesList.forEach((Module) => {
-    BareLocalStorageData = localStorage.getItem("SCMM-MODS");
-    ParsedLSData = JSON.parse(BareLocalStorageData);
-  
-    Add(Module.name, Module.imagedata);
-    EnableToggle(Module.name);
-    setInterval(function () {
-      SetCorrectToggle(Module.name);
-    }, 100);
+    Add(Module.name, Module.imagedata, Module.Init, Module.Cleanup);
+    SetCorrectToggle(Module.name);
   });
 }
