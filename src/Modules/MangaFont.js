@@ -1,8 +1,10 @@
 let isTextSwitchingEnabled = true; // Initialize the state variable
+let ModuleIndex; // Declare the ModuleIndex variable
+let Data; // Declare the Data variable
 
 export function Init(name) {
-    const Data = JSON.parse(localStorage.getItem("SCMM-MODS"));
-    const ModuleIndex = Data.findIndex((e) => e.name === name);
+    Data = JSON.parse(localStorage.getItem("SCMM-MODS"));
+    ModuleIndex = Data.findIndex((e) => e.name === name);
     if (ModuleIndex !== 1 && !Data[ModuleIndex].enabled) {
         ModAPI.require("player")
 
@@ -40,7 +42,12 @@ export function Init(name) {
             }).join('');
         });
     } else {
-        isTextSwitchingEnabled = !isTextSwitchingEnabled;
-        console.log(`Text switching is now ${isTextSwitchingEnabled ? 'enabled' : 'disabled'}`);
+        ToggleTextSwitching();
     }
+}
+
+// Add a function to toggle the text switching
+function ToggleTextSwitching() {
+    isTextSwitchingEnabled = !isTextSwitchingEnabled;
+    console.log(`Text switching is now ${isTextSwitchingEnabled ? 'enabled' : 'disabled'}`);
 }
