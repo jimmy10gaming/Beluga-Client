@@ -9,18 +9,18 @@ export const LogoData = Logo;
 export let ModulesList = [
   {
     name: "Keystrokes",
-    imagedata: Keystrokesimg,
+    imagedata: Logo,
   },
   {
     name: "Fullbright",
-    imagedata: Fullbrightimg,
+    imagedata: Logo,
   },
   {
     name: "XpHud",
-    imagedata: XpHudimg,
+    imagedata: Logo,
   },
   {
     name: "MangaFont",
-    imagedata: MangaFontimg,
+    imagedata: Logo,
   },
 ];
