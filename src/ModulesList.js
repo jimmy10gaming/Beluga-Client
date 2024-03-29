@@ -17,10 +17,10 @@ export let ModulesList = [
   },
   {
     name: "XpHud",
-    imagedata: Logo,
+    imagedata: XpHudimg,
   },
   {
     name: "MangaFont",
-    imagedata: Logo,
+    imagedata: MangaFontimg,
   },
 ];
