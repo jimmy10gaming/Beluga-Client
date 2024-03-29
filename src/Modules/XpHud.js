@@ -6,7 +6,7 @@ export function Init(name) {
         ModAPI.require("player");
 
         // Override the default death screen
-        ModAPI.addEventListener("playerDeath", (event) => {
+        ModAPI.addEventListener("playerDeath", (playerDeathEvent) => {
             // Get the player's coordinates
             const player = ModAPI.player;
             const playerPos = player.getPositionVector();
