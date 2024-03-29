@@ -36,6 +36,6 @@ export let ModulesList = [
   },
   {
     name: "LofiSongPlayer",
-    imagedata: Logo,
+    imagedata: LofiSongPlayerimg,
   },
 ];
