@@ -35,7 +35,7 @@ export let ModulesList = [
     imagedata: ChatShortcutsimg,
   },
   {
-    name: "Lofi Music",
+    name: "LofiSongPlayer",
     imagedata: LofiSongPlayerimg,
   },
 ];
