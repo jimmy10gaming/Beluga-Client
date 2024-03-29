@@ -1,5 +1,5 @@
 const { SetupModules } = require("./Modules");
-const { LogoData } = require("../LogoData");
+import LogoData from '../Base64/LogoData.js';
 
 let isMenuOpen = false;
 

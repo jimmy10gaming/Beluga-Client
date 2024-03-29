@@ -1,4 +1,8 @@
 const { ModulesList } = require("../ModulesList");
+const KeystrokesInit = require('../Modules/Keystrokes').Init;
+const FullbrightInit = require('../Modules/Fullbright').Init;
+const XpHudInit = require('../Modules/XpHud').Init;
+const MangaFontInit = require('../Modules/MangaFont').Init;
 
 let parsedLSData = getModulesFromLocalStorage();
 
@@ -40,7 +44,7 @@ export function SetupModules() {
       if (parsedLSData[index].enabled) {
         module.init(module.name);
       } else {
-        //disable mods
+        // Disable module functionality
         eval(`${module.name}.Init("${module.name}")`);
       }
     }

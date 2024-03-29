@@ -1,13 +1,16 @@
+//imports for base64
 import KeystrokesImage from './Base64/Keystrokes.js';
 import FullbrightImage from './Base64/Fullbright.js';
 import XpHudImage from './Base64/XpHud.js';
 import MangaFontImage from './Base64/MangaFont.js';
 
-import { Init as KeystrokesInit } from '../Modules/Keystrokes';
-import { Init as FullbrightInit } from '../Modules/Fullbright';
-import { Init as XpHudInit } from '../Modules/XpHud';
-import { Init as MangaFontInit } from '../Modules/MangaFont';
+//init functions
+import { Init as KeystrokesInit } from './Modules/Keystrokes';
+import { Init as FullbrightInit } from './Modules/Fullbright';
+import { Init as XpHudInit } from './Modules/XpHud';
+import { Init as MangaFontInit } from './Modules/MangaFont';
 
+//modlist um i forgor what its called (stuff fr)
 export const ModulesList = [
   {
     name: "Keystrokes",
