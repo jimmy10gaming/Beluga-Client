@@ -5,7 +5,6 @@ import XpHudimg from "./Base64/XpHud.png"
 import MangaFontimg from "./Base64/MangaFont.png"
 import ToggleSprintimg from "./Base64/ToggleSprint.png"
 import ChatShortcutsimg from "./Base64/ChatShortcuts.png"
-import LofiSongPlayerimg from "./Base64/LofiSongPlayer.png"
 
 export const LogoData = Logo;
 
@@ -33,9 +32,5 @@ export let ModulesList = [
   {
     name: "ChatShortcuts",
     imagedata: ChatShortcutsimg,
-  },
-  {
-    name: "LofiSongPlayer",
-    imagedata: LofiSongPlayerimg,
   },
 ];

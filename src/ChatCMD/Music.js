@@ -1,12 +1,6 @@
-export function Init(name) {
-    const Data = JSON.parse(localStorage.getItem("SCMM-MODS"));
-    const ModuleIndex = Data.findIndex((e) => e.name === name);
-
-    if (ModuleIndex !== 1 && !Data[ModuleIndex].enabled) {
-
 ModAPI.require('player')
 
-let songplayer = new Audio('https://youtu.be/Z6-Gh3iUkxY?list=PLWsBD9-HWsmKdIrejc2V3qVp4IxzT2rbA.mp3')
+let songplayer = new Audio('https://files.catbox.moe/k4j25x.mp3')
 songplayer.volume = 0.1
 
 ModAPI.addEventListener('sendchatmessage', function(e) {
@@ -32,7 +26,3 @@ ModAPI.addEventListener('sendchatmessage', function(e) {
         }
     }
 })
-    } else {
-        console.log("off");
-    }
-}
