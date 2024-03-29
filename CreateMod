@@ -9,7 +9,7 @@
 
 3.) right click Base64 (the folder)
 
-4.) name the folder the same thing as you named the mod so lightning.js now you have "/workspaces/Solar-Client/src/Base64/{ModName}.js"
+4.) Upload an image and have the image the same name as ur mod so for me lightning.png
 
 5.) Create a new Module in ModulesList.js should look like this: 
  {
@@ -26,6 +26,13 @@ import { Init as {ModName}Init } from './Modules/{ModName}';
 8.) go to /workspaces/Solar-Client/src/GUI/Modules.js and create a Const at the top that should look like this:
 const {ModName}Init = require('../Modules/{ModName}').Init;
 
-9.) your done :p i think
+9.) do node B64.js
 
+10.) get rid of the .png files you now have laying around in the Base64 folder
+
+11.) done :p
+
+-----------------------------------------------------------------------------------------------------------------
+> troubleshooting 
+issues with crashing, probably the Base64 image
 
