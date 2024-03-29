@@ -3,6 +3,7 @@ import Keystrokesimg from "./Base64/Keystrokes.png"
 import Fullbrightimg from "./Base64/Fullbright.png"
 import XpHudimg from "./Base64/XpHud.png"
 import MangaFontimg from "./Base64/MangaFont.png"
+import ToggleSprintimg from "./Base64/ToggleSprint.png"
 
 export const LogoData = Logo;
 
@@ -22,5 +23,9 @@ export let ModulesList = [
   {
     name: "MangaFont",
     imagedata: MangaFontimg,
+  },
+  {
+    name: "ToggleSprint",
+    imagedata: ToggleSprintimg,
   },
 ];
