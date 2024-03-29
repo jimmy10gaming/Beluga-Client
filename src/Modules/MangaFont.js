@@ -46,3 +46,9 @@ export function Init(name) {
         console.log("Disabled Mod");
     }
 }
+
+// Add a function to toggle the text switching
+export function ToggleTextSwitching() {
+    isTextSwitchingEnabled = !isTextSwitchingEnabled;
+    console.log(`Text switching is now ${isTextSwitchingEnabled ? 'enabled' : 'disabled'}`);
+}
