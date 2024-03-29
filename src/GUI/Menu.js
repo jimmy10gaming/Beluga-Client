@@ -1,5 +1,5 @@
 const { SetupModules } = require("./Modules");
-const { LogoData } = require("../ModulesList");
+const { LogoData } = require("../LogoData");
 
 let isMenuOpen = false;
 

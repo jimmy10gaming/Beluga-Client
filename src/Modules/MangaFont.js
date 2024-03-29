@@ -1,4 +1,4 @@
-let isTextSwitchingEnabled = true; // Initialize the state variable
+let isTextSwitchingEnabled = true; 
 
 export function Init(name) {
     const Data = JSON.parse(localStorage.getItem("SCMM-MODS"));
@@ -42,7 +42,7 @@ export function Init(name) {
             }
         });
     } else {
-        isTextSwitchingEnabled = false; // Disable text switching
+        isTextSwitchingEnabled = false;
         console.log("Disabled Mod");
     }
 }

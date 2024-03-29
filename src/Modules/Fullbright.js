@@ -22,5 +22,3 @@ export function Init(name) {
     }, 5000);
   }
 }
-
-//I think i broke this idk i cant tell
