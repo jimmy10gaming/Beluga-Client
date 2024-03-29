@@ -5,7 +5,7 @@ const { ChatCommands } = require("./ChatCMD/Help")
 StartupModules();
 
 window.addEventListener("keydown", function (e) {
-  if (e.key === ".") {
+  if (e.key === "=") {
     CreateMenu();
   }
 });
