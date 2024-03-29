@@ -1,40 +1,26 @@
-import ClientLogo from './Base64/ClientLogo.png';
-import KeystrokesImage from './Base64/Keystrokes.png';
-import FullbrightImage from './Base64/Fullbright.png';
-import XpHudImage from './Base64/XpHud.png';
-import MangaFontImage from './Base64/MangaFont.png';
+import Logo from "./Base64/ClientLogo.png"
+import Keystrokesimg from "./Base64/Keystrokes.png"
+import Fullbrightimg from "./Base64/Fullbright.png"
+import XpHudimg from "./Base64/XpHud.png"
+import MangaFontimg from "./Base64/MangaFont.png"
 
-import { Init as KeystrokesInit } from './Modules/Keystrokes';
-import { Init as FullbrightInit } from './Modules/Fullbright';
-import { Init as XpHudInit } from './Modules/XpHud';
-import { Init as MangaFontInit } from './Modules/MangaFont';
+export const LogoData = Logo;
 
-export const LogoData = ClientLogo;
-
-export const ModulesList = [
-  {
-    name: "LogoData",
-    imagedata: LogoDataImage,
-    init: LogoDataInit
-  },
+export let ModulesList = [
   {
     name: "Keystrokes",
-    imagedata: KeystrokesImage,
-    init: KeystrokesInit
+    imagedata: Keystrokesimg,
   },
   {
     name: "Fullbright",
-    imagedata: FullbrightImage,
-    init: FullbrightInit
+    imagedata: Fullbrightimg,
   },
   {
     name: "XpHud",
-    imagedata: XpHudImage,
-    init: XpHudInit
+    imagedata: XpHudimg,
   },
   {
     name: "MangaFont",
-    imagedata: MangaFontImage,
-    init: MangaFontInit
-  }
+    imagedata: MangaFontimg,
+  },
 ];
