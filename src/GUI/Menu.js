@@ -47,8 +47,20 @@ export function CreateMenu() {
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             ">Fracticle Client</h1>
         </div>
+        <div style="
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            height: fit-content;
+            width: 100%;
+            color: #fff;
+            gap: 1.5vw;
+            font-family: 'Minecraftia', sans-serif;" 
+        id="SCMM-MODULES">
+        </div>
         `;
-        
     document.body.appendChild(Holder);
     Holder.appendChild(Menu);
 
