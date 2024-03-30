@@ -15,7 +15,7 @@ export function CreateMenu() {
     Menu.style = `
             width: 65vw;
             height: 70vh;
-            background: linear-gradient(to right, #0072C6, #808080, #000000);
+            background: rgba(0, 0, 0, 0.75);
             border-radius: 2.5vh;
             display: flex;
             flex-direction: column;
