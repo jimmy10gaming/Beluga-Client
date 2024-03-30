@@ -15,11 +15,12 @@ export function CreateMenu() {
     Menu.style = `
             width: 65vw;
             height: 70vh;
-            background: radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
+            background: linear-gradient(to right, #0072C6, #808080, #000000);
             border-radius: 2.5vh;
             display: flex;
             flex-direction: column;
             padding: 2vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         `;
     Menu.innerHTML = `
         <div style="
@@ -39,6 +40,7 @@ export function CreateMenu() {
             src="${LogoData}">
             <h1 style="
                 font-size: 4vh;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             ">Fracticle Client</h1>
         </div>
         <div style="
@@ -52,7 +54,40 @@ export function CreateMenu() {
             color: #fff;
             gap: 1.5vw;
             font-family: 'Minecraftia', sans-serif;" 
-        id="SCMM-MODULES"></div>
+        id="SCMM-MODULES">
+            <div style="
+                background-color: rgba(255, 255, 255, 0.1);
+                padding: 1.5vh 2vw;
+                border-radius: 1vh;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease;
+            ">
+                <h3 style="
+                    font-size: 2.5vh;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                ">Module 1</h3>
+                <p style="
+                    font-size: 1.8vh;
+                    color: #ccc;
+                ">Description of Module 1</p>
+            </div>
+            <div style="
+                background-color: rgba(255, 255, 255, 0.1);
+                padding: 1.5vh 2vw;
+                border-radius: 1vh;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease;
+            ">
+                <h3 style="
+                    font-size: 2.5vh;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                ">Module 2</h3>
+                <p style="
+                    font-size: 1.8vh;
+                    color: #ccc;
+                ">Description of Module 2</p>
+            </div>
+        </div>
         `;
     document.body.appendChild(Holder);
     Holder.appendChild(Menu);
