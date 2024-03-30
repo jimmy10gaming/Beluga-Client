@@ -47,56 +47,8 @@ export function CreateMenu() {
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             ">Fracticle Client</h1>
         </div>
-        <div style="
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            flex-direction: row;
-            align-items: center;
-            height: fit-content;
-            width: 100%;
-            color: #fff;
-            gap: 1.5vw;
-            font-family: 'Minecraftia', sans-serif;" 
-        id="SCMM-MODULES">
-            <div style="
-                background-color: rgba(255, 255, 255, 0.1);
-                padding: 1.5vh 2vw;
-                border-radius: 1vh;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                transition: transform 0.3s ease;
-                width: 20%;
-                height: 15vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            ">
-                <h3 style="
-                    font-size: 2.5vh;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-                ">Module 1</h3>
-            </div>
-            <div style="
-                background-color: rgba(255, 255, 255, 0.1);
-                padding: 1.5vh 2vw;
-                border-radius: 1vh;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                transition: transform 0.3s ease;
-                width: 20%;
-                height: 15vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            ">
-                <h3 style="
-                    font-size: 2.5vh;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-                ">Module 2</h3>
-            </div>
-        </div>
         `;
+        
     document.body.appendChild(Holder);
     Holder.appendChild(Menu);
 
