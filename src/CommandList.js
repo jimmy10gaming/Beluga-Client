@@ -1,7 +1,7 @@
 import Music from "./ChatCMD/Music"
 
 
-export let ModulesList = [
+export let CommandList = [
     {
       name: "Music",
       commandData: Music,
