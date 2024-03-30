@@ -4,7 +4,7 @@ export function Init(name) {
 
     if (ModuleIndex !== 1 && !Data[ModuleIndex].enabled) {
         
-        ModAPI.require("player");
+        /* ModAPI.require("player");
 
         ModAPI.displayToChat({ msg: "Death Position Enabled" });
 
@@ -18,7 +18,9 @@ export function Init(name) {
             ModAPI.displayToChat({
                 msg: `You died at coordinates: X: ${x}, Y: ${y}, Z: ${z}`
             });
-        });
+        }); 
+        kept breaking my game so turned off for now*/
+        console.log("enabled mod");
 
     } else {
         console.log("Disabled Mod");
