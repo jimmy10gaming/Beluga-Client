@@ -20,7 +20,8 @@ export function CreateMenu() {
             display: flex;
             flex-direction: column;
             padding: 2vh;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.5);
+            animation: shine 3s ease-in-out infinite;
         `;
     Menu.innerHTML = `
         <div style="
@@ -36,7 +37,10 @@ export function CreateMenu() {
         >
             <img style="
                 width:  20vh; 
-                height: 20vh;" 
+                height: 20vh;
+                border-radius: 50%;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            " 
             src="${LogoData}">
             <h1 style="
                 font-size: 4vh;
@@ -61,15 +65,17 @@ export function CreateMenu() {
                 border-radius: 1vh;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
                 transition: transform 0.3s ease;
+                width: 20%;
+                height: 15vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             ">
                 <h3 style="
                     font-size: 2.5vh;
                     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
                 ">Module 1</h3>
-                <p style="
-                    font-size: 1.8vh;
-                    color: #ccc;
-                ">Description of Module 1</p>
             </div>
             <div style="
                 background-color: rgba(255, 255, 255, 0.1);
@@ -77,15 +83,17 @@ export function CreateMenu() {
                 border-radius: 1vh;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
                 transition: transform 0.3s ease;
+                width: 20%;
+                height: 15vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             ">
                 <h3 style="
                     font-size: 2.5vh;
                     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
                 ">Module 2</h3>
-                <p style="
-                    font-size: 1.8vh;
-                    color: #ccc;
-                ">Description of Module 2</p>
             </div>
         </div>
         `;
