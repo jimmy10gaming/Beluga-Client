@@ -3,202 +3,199 @@ const { LogoData } = require("../ModulesList");
 
 let isMenuOpen = false;
 
-export function CreateMenu() {
-  if (!isMenuOpen) {
-    isMenuOpen = true;
+function createStarsContainer() {
+  const starsContainer = document.createElement('div');
+  starsContainer.classList.add('stars');
 
-    const Holder = document.createElement("div");
-    Holder.style =
-      "backdrop-filter: blur(2px);width: fit-content;height: fit-content;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);";
-    Holder.id = "SCMM";
-    const Menu = document.createElement("div");
-    Menu.style = `
-            width: 65vw;
-            height: 70vh;
-            background: rgba(0, 0, 0, 0.75);
-            border-radius: 2.5vh;
-            display: flex;
-            flex-direction: column;
-            padding: 2vh;
-        `;
-    Menu.innerHTML = `
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    star.style.setProperty('--star-tail-length', `${Math.random() * 650 + 100}em`);
+    star.style.setProperty('--top-offset', `${Math.random() * 10000}vh`);
+    star.style.setProperty('--fall-duration', `${Math.random() * 6 + 6}s`);
+    star.style.setProperty('--fall-delay', `${Math.random() * 10}s`);
+
+    starsContainer.appendChild(star);
+  }
+
+  return starsContainer;
+}
+
+function createMenuBackground() {
+  function CreateMenu() {
+    if (!isMenuOpen) {
+      isMenuOpen = true;
+
+      const Holder = document.createElement("div");
+      Holder.style =
+        "backdrop-filter: blur(2px); width: fit-content; height: fit-content; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);";
+      Holder.id = "SCMM";
+
+      const starsContainer = createStarsContainer();
+      Holder.appendChild(starsContainer);
+
+      const Menu = document.createElement("div");
+      Menu.style = `
+        width: 65vw;
+        height: 70vh;
+        background: rgba(0, 0, 0, 0.75);
+        border-radius: 2.5vh;
+        display: flex;
+        flex-direction: column;
+        padding: 2vh;
+      `;
+      Menu.innerHTML = `
         <div style="
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: fit-content;
-            width: 100%;
-            color: #fff;
-            gap: 1.5vw;
-            font-family: 'Minecraftia', sans-serif;"
-            margin-bottom: 1vh;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          height: fit-content;
+          width: 100%;
+          color: #fff;
+          gap: 1.5vw;
+          font-family: 'Minecraftia', sans-serif;"
+          margin-bottom: 1vh;
         >
-            <img style="
-                width:  20vh; 
-                height: 20vh;" 
-            src="${LogoData}">
-            <h1 style="
-                font-size: 4vh;
-            ">Fracticle Client</h1>
+          <img style="
+            width:  20vh; 
+            height: 20vh;" 
+          src="${LogoData}">
+          <h1 style="
+            font-size: 4vh;
+          ">Fracticle Client</h1>
         </div>
         <div style="
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            flex-direction: row;
-            align-items: center;
-            height: fit-content;
-            width: 100%;
-            color: #fff;
-            gap: 1.5vw;
-            font-family: 'Minecraftia', sans-serif;" 
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          flex-direction: row;
+          align-items: center;
+          height: fit-content;
+          width: 100%;
+          color: #fff;
+          gap: 1.5vw;
+          font-family: 'Minecraftia', sans-serif;" 
         id="SCMM-MODULES"></div>
-        `;
-    document.body.appendChild(Holder);
-    Holder.appendChild(Menu);
+      `;
+      Holder.appendChild(Menu);
 
-    SetupModules();
+      document.body.appendChild(Holder);
 
-    // Add the star background effect
-    let start = new Date().getTime();
-
-    const originPosition = { x: 0, y: 0 };
-
-    const container = document.createElement("div");
-    container.id = "magic-mouse-container";
-    document.body.appendChild(container);
-
-    const last = {
-      starTimestamp: start,
-      starPosition: originPosition,
-      mousePosition: originPosition
-    };
-
-    const config = {
-      starAnimationDuration: 1500,
-      minimumTimeBetweenStars: 250,
-      minimumDistanceBetweenStars: 75,
-      glowDuration: 75,
-      maximumGlowPointSpacing: 10,
-      colors: ["245 245 245", "59 130 246"],
-      sizes: ["1.4rem", "1rem", "0.6rem"],
-      animations: ["fall-1", "fall-2", "fall-3"]
-    };
-
-    let count = 0;
-      
-    const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,
-          selectRandom = items => items[rand(0, items.length - 1)];
-
-    const withUnit = (value, unit) => `${value}${unit}`,
-          px = value => withUnit(value, "px"),
-          ms = value => withUnit(value, "ms");
-
-    const calcDistance = (a, b) => {
-      const diffX = b.x - a.x,
-            diffY = b.y - a.y;
-      
-      return Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
-    };
-
-    const calcElapsedTime = (start, end) => end - start;
-
-    const appendElement = element => container.appendChild(element),
-          removeElement = (element, delay) => setTimeout(() => container.removeChild(element), delay);
-
-    const createStar = position => {
-      const star = document.createElement("span"),
-            color = selectRandom(config.colors);
-      
-      star.className = "item fa-solid fa-block-question";
-      
-      star.style.left = px(position.x);
-      star.style.top = px(position.y);
-      star.style.fontSize = selectRandom(config.sizes);
-      star.style.color = `rgb(${color})`;
-      star.style.textShadow = `0px 0px 1.5rem rgb(${color} / 0.5)`;
-      star.style.animationName = config.animations[count++ % 3];
-      star.style.starAnimationDuration = ms(config.starAnimationDuration);
-      
-      appendElement(star);
-
-      removeElement(star, config.starAnimationDuration);
-    };
-
-    const createGlowPoint = position => {
-      const glow = document.createElement("div");
-      
-      glow.className = "glow-point";
-      
-      glow.style.left = px(position.x);
-      glow.style.top = px(position.y);
-      
-      appendElement(glow)
-      
-      removeElement(glow, config.glowDuration);
-    };
-
-    const determinePointQuantity = distance => Math.max(
-      Math.floor(distance / config.maximumGlowPointSpacing),
-      1
-    );
-
-    const createGlow = (last, current) => {
-      const distance = calcDistance(last, current),
-            quantity = determinePointQuantity(distance);
-      
-      const dx = (current.x - last.x) / quantity,
-            dy = (current.y - last.y) / quantity;
-      
-      Array.from(Array(quantity)).forEach((_, index) => { 
-        const x = last.x + dx * index, 
-              y = last.y + dy * index;
-        
-        createGlowPoint({ x, y });
-      });
-    };
-
-    const updateLastStar = position => {
-      last.starTimestamp = new Date().getTime();
-
-      last.starPosition = position;
-    };
-
-    const updateLastMousePosition = position => last.mousePosition = position;
-
-    const adjustLastMousePosition = position => {
-      if(last.mousePosition.x === 0 && last.mousePosition.y === 0) {
-        last.mousePosition = position;
-      }
-    };
-
-    const handleOnMove = e => {
-      const mousePosition = { x: e.clientX, y: e.clientY }
-      
-      adjustLastMousePosition(mousePosition);
-      
-      const now = new Date().getTime(),
-            hasMovedFarEnough = calcDistance(last.starPosition, mousePosition) >= config.minimumDistanceBetweenStars,
-            hasBeenLongEnough = calcElapsedTime(last.starTimestamp, now) > config.minimumTimeBetweenStars;
-      
-      if(hasMovedFarEnough || hasBeenLongEnough) {
-        createStar(mousePosition);
-        
-        updateLastStar(mousePosition);
-      }
-      
-      createGlow(last.mousePosition, mousePosition);
-      
-      updateLastMousePosition(mousePosition);
-    };
-
-    window.onmousemove = e => handleOnMove(e);
-
-    window.ontouchmove = e => handleOnMove(e.touches[0]);
-
-    document.body.onmouseleave = () => updateLastMousePosition(originPosition);
-  } else {
-    document.getElementById("SCMM").remove();
-    isMenuOpen = false;
+      SetupModules();
+    } else {
+      document.getElementById("SCMM").remove();
+      isMenuOpen = false;
+    }
   }
+
+  return CreateMenu;
 }
+
+const CreateMenu = createMenuBackground();
+CreateMenu();
+
+// CSS
+const styleElement = document.createElement('style');
+styleElement.textContent = `
+  @mixin sp-layout {
+    @media screen and (max-width: 750px) {
+      @content;
+    }
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+    overflow: hidden;
+  }
+
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    transform: rotate(-45deg);
+  }
+
+  .star {
+    --star-color: var(--primary-color);
+    --star-tail-length: 6em;
+    --star-tail-height: 2px;
+    --star-width: calc(var(--star-tail-length) / 6);
+    --fall-duration: 9s;
+    --tail-fade-duration: var(--fall-duration);
+
+    position: absolute;
+    top: var(--top-offset);
+    left: 0;
+    width: var(--star-tail-length);
+    height: var(--star-tail-height);
+    color: var(--star-color);
+    background: linear-gradient(45deg, currentColor, transparent);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 6px currentColor);
+    transform: translate3d(104em, 0, 0);
+    animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+
+    @include sp-layout {
+      // For mobile performance, tail-fade animation will be removed QAQ
+      animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: calc(var(--star-width) / -2);
+      width: var(--star-width);
+      height: 100%;
+      background: linear-gradient(45deg, transparent, currentColor, transparent);
+      border-radius: inherit;
+      animation: blink 2s linear infinite;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  @keyframes fall {
+    to {
+      transform: translate3d(-30em, 0, 0);
+    }
+  }
+
+  @keyframes tail-fade {
+    0%, 50% {
+      width: var(--star-tail-length);
+      opacity: 1;
+    }
+
+    70%, 80% {
+      width: 0;
+      opacity: 0.4;
+    }
+
+    100% {
+      width: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0.6;
+    }
+  }
+`;
+document.head.appendChild(styleElement);
