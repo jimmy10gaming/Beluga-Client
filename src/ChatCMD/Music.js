@@ -2,7 +2,6 @@ ModAPI.require('player')
 
 let songplayer = new Audio('https://files.catbox.moe/k4j25x.mp3')
 songplayer.volume = 0.1
-let oldVolume = songplayer.volume;
 let loopToggle = false()
 
 ModAPI.addEventListener('sendchatmessage', function(e) {
@@ -22,7 +21,6 @@ ModAPI.addEventListener('sendchatmessage', function(e) {
         e.preventDefault = true
         try {
             songplayer.volume = (e.message.substr(8) / 100)
-            oldVolume = songplayer.volume
             ModAPI.displayToChat({msg: '§3Volume set to '+ e.message.substr(8)})
         } catch (error) {
             ModAPI.displayToChat({msg: "§6[§4ERROR§6] §c"+error})
