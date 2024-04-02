@@ -2,7 +2,7 @@ const { SetupModules } = require("./Modules");
 const { LogoData } = require("../ModulesList");
 
 let isMenuOpen = false;
-let isDarkMode = false;
+let isDarkMode = localStorage.getItem("isDarkMode") === "true" || false;
 
 function toggleDarkMode() {
   const Holder = document.getElementById("SCMM");
@@ -12,6 +12,7 @@ function toggleDarkMode() {
   switchIcon.classList.toggle("fa-sun");
   switchIcon.classList.toggle("fa-moon");
   isDarkMode = !isDarkMode;
+  localStorage.setItem("isDarkMode", isDarkMode.toString());
 }
 
 function createStyles() {
@@ -141,12 +142,12 @@ function createStyles() {
     }
 
     .light-mode .menu-container {
-      background: linear-gradient(to bottom right, #2c3e50, #34495e);
+      background: #f0f0f0;
       box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
     }
 
     .light-mode .menu-header h1 {
-      color: #fff;
+      color: #000;
     }
 
     .dark-mode {
@@ -208,7 +209,7 @@ export function CreateMenu() {
 
     const Holder = document.createElement("div");
     Holder.id = "SCMM";
-    Holder.classList.add("light-mode");
+    Holder.classList.add(isDarkMode ? "dark-mode" : "light-mode");
 
     const Menu = document.createElement("div");
     Menu.classList.add("menu-container");
@@ -250,7 +251,7 @@ export function CreateMenu() {
       module.style.borderRadius = "10px";
       module.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.2)";
       module.style.transition = "transform 0.3s ease-in-out";
-      module.style.flex = "0 0 calc(33.33% - 20px)"; // Set the module width to 1/3 of the container
+      module.style.flex = "0 0 calc(33.33% - 20px)";
       module.addEventListener("mouseover", () => {
         module.style.transform = "scale(1.05)";
       });
