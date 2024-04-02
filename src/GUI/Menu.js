@@ -199,6 +199,37 @@ function createStyles() {
         box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
       }
     }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .light-mode .search-input {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+
+    .light-mode .search-input::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
   `;
   document.head.appendChild(style);
 }
@@ -228,6 +259,9 @@ export function CreateMenu() {
             </div>
           </div>
         </div>
+      </div>
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search for mods..." />
       </div>
       <div id="SCMM-MODULES" class="module-container">
         <!-- Modules will be inserted here dynamically -->
@@ -264,10 +298,29 @@ export function CreateMenu() {
     const switchContainer = Holder.querySelector('.switch-container');
     switchContainer.addEventListener('click', toggleDarkMode);
 
+    // Add event listener for the search input
+    const searchInput = Holder.querySelector('.search-input');
+    searchInput.addEventListener('input', filterModules);
+
     createStyles();
     SetupModules();
   } else {
     document.getElementById("SCMM").remove();
     isMenuOpen = false;
   }
+}
+
+function filterModules() {
+  const searchInput = document.querySelector('.search-input');
+  const searchTerm = searchInput.value.toLowerCase();
+  const modules = document.querySelectorAll('#SCMM-MODULES > *');
+
+  modules.forEach((module) => {
+    const moduleText = module.textContent.toLowerCase();
+    if (moduleText.includes(searchTerm)) {
+      module.style.display = 'block';
+    } else {
+      module.style.display = 'none';
+    }
+  });
 }
