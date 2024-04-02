@@ -228,7 +228,7 @@ export function CreateMenu() {
           </div>
         </div>
       </div>
-      <div id="SCMM-MODULES">
+      <div id="SCMM-MODULES" class="module-container">
         <!-- Modules will be inserted here dynamically -->
       </div>
     `;
@@ -237,6 +237,12 @@ export function CreateMenu() {
     Holder.appendChild(Menu);
 
     // Add some additional styles to the modules
+    const moduleContainer = Holder.querySelector("#SCMM-MODULES");
+    moduleContainer.style.display = "flex";
+    moduleContainer.style.flexWrap = "wrap";
+    moduleContainer.style.justifyContent = "center";
+    moduleContainer.style.gap = "20px";
+
     const modules = document.querySelectorAll("#SCMM-MODULES > *");
     modules.forEach((module) => {
       module.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
@@ -244,6 +250,7 @@ export function CreateMenu() {
       module.style.borderRadius = "10px";
       module.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.2)";
       module.style.transition = "transform 0.3s ease-in-out";
+      module.style.flex = "0 0 calc(33.33% - 20px)"; // Set the module width to 1/3 of the container
       module.addEventListener("mouseover", () => {
         module.style.transform = "scale(1.05)";
       });
