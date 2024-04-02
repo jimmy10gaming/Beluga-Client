@@ -49,6 +49,17 @@ export function CreateMenu() {
                 font-weight: 700;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             ">Fracticle Client</h1>
+            <div class="dark-mode-switch">
+              <div class="switch-container">
+                <div class="switch-bg"></div>
+                <div class="switch-circle">
+                  <div class="switch-icon">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
         <div style="
             display: flex;
@@ -81,6 +92,14 @@ export function CreateMenu() {
       module.addEventListener("mouseout", () => {
         module.style.transform = "scale(1)";
       });
+    });
+
+    // Add event listener for the dark mode switch
+    const switchContainer = document.querySelector('.switch-container');
+    const guiContainer = document.querySelector('#SCMM');
+
+    switchContainer.addEventListener('click', () => {
+      guiContainer.classList.toggle('dark-mode');
     });
 
     SetupModules();
