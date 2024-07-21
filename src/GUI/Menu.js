@@ -1,19 +1,20 @@
-const { SetupModules } = require("./Modules");
-const { LogoData } = require("../ModulesList");
+import { SetupModules } from "./Modules";
+import { LogoData, ModulesList } from "../ModulesList";
 
 let isMenuOpen = false;
-let isDarkMode = localStorage.getItem("isDarkMode") === "true" || false;
+const isDarkMode = localStorage.getItem("isDarkMode") === "true" || false;
 
-function toggleDarkMode() {
-  const Holder = document.getElementById("SCMM");
-  Holder.classList.toggle("light-mode");
-  Holder.classList.toggle("dark-mode");
-  const switchIcon = Holder.querySelector(".switch-icon i");
-  switchIcon.classList.toggle("fa-sun");
-  switchIcon.classList.toggle("fa-moon");
-  isDarkMode = !isDarkMode;
-  localStorage.setItem("isDarkMode", isDarkMode.toString());
-}
+const COLORS = {
+  BACKGROUND: '#1e1e1e',
+  SIDEBAR: '#252525',
+  ACCENT: '#0072ff',
+  TEXT: '#ffffff',
+  TEXT_SECONDARY: '#8c8c8c',
+  MODULE_BACKGROUND: '#2a2a2a',
+  MODULE_HOVER: '#303030',
+  TOGGLE_ON: '#0072ff',
+  TOGGLE_OFF: '#4d4d4d'
+};
 
 function createStyles() {
   const style = document.createElement("style");
@@ -21,304 +22,228 @@ function createStyles() {
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
     }
 
     #SCMM {
-      backdrop-filter: blur(10px);
-      width: 100vw;
-      height: 100vh;
       position: fixed;
       left: 0;
       top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
       display: flex;
-      justify-content: center;
-      align-items: center;
       z-index: 9999;
-      background-color: rgba(0, 0, 0, 0.5);
-      transition: background-color 0.3s ease;
     }
 
-    .menu-container {
-      width: 80%;
-      max-width: 800px;
-      height: 80%;
-      max-height: 600px;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      padding: 30px;
-      box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
-      background: var(--menu-background);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    .sidebar {
+      width: 250px;
+      background-color: ${COLORS.SIDEBAR};
+      padding: 20px;
+      overflow-y: auto;
     }
 
-    .menu-header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      height: fit-content;
-      width: 100%;
-      color: var(--text-color);
-      gap: 20px;
-      margin-bottom: 20px;
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
     }
 
-    .menu-header img {
+    .logo {
       width: 80px;
       height: 80px;
-      border-radius: 50%;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    }
-
-    .menu-header h1 {
-      font-size: 32px;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .dark-mode-switch {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-left: auto;
-    }
-
-    .switch-container {
-      position: relative;
-      width: 80px;
-      height: 40px;
-      background-color: #fff;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .switch-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #333;
-      border-radius: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .switch-circle {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 30px;
-      height: 30px;
-      background-color: #333;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-
-    .switch-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-
-    .switch-icon .fa-sun {
+      margin: 0 auto 20px;
       display: block;
     }
 
-    .switch-icon .fa-moon {
-      display: none;
+    .client-name {
+      color: ${COLORS.ACCENT};
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .light-mode {
-      --menu-background: #f0f0f0;
-      --text-color: #000;
-    }
-
-    .dark-mode {
-      --menu-background: #444;
-      --text-color: #fff;
-    }
-
-    .dark-mode .switch-container {
-      background-color: #fff;
-    }
-
-    .dark-mode .switch-bg {
-      opacity: 1;
-    }
-
-    .dark-mode .switch-circle {
-      transform: translateX(40px);
-      background-color: #fff;
-    }
-
-    .dark-mode .switch-icon {
-      color: #333;
-    }
-
-    .dark-mode .switch-icon .fa-sun {
-      display: none;
-    }
-
-    .dark-mode .switch-icon .fa-moon {
-      display: block;
-    }
-
-    @keyframes shine {
-      0% {
-        box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 80px 30px rgba(255, 255, 255, 0.4);
-      }
-      100% {
-        box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
-      }
-    }
-
-    .search-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .search-input {
-      width: 100%;
-      max-width: 400px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      font-size: 16px;
-      background-color: rgba(255, 255, 255, 0.2);
-      color: var(--text-color);
-      transition: background-color 0.3s ease;
-    }
-
-    .search-input::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    .light-mode .search-input {
-      background-color: rgba(0, 0, 0, 0.1);
-      color: #333;
-    }
-
-    .light-mode .search-input::placeholder {
-      color: rgba(0, 0, 0, 0.4);
-    }
-
-    .module-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    .category {
+      color: ${COLORS.TEXT};
+      font-size: 18px;
+      font-weight: bold;
+      margin: 20px 0 10px;
     }
 
     .module {
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease-in-out, background-color 0.3s ease;
-      flex: 0 0 calc(33.33% - 20px);
-      cursor: pointer;
+      background-color: ${COLORS.MODULE_BACKGROUND};
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s;
     }
 
     .module:hover {
-      transform: scale(1.05);
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: ${COLORS.MODULE_HOVER};
     }
 
-    .module h2 {
-      font-size: 18px;
-      margin: 0 0 10px 0;
-      color: var(--text-color);
+    .module-icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 15px;
     }
 
-    .module p {
+    .module-info {
+      flex: 1;
+    }
+
+    .module-name {
+      color: ${COLORS.TEXT};
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .module-description {
+      color: ${COLORS.TEXT_SECONDARY};
       font-size: 14px;
-      margin: 0;
-      color: var(--text-color);
+    }
+
+    .toggle-switch {
+      width: 50px;
+      height: 26px;
+      background-color: ${COLORS.TOGGLE_OFF};
+      border-radius: 13px;
+      position: relative;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .toggle-switch.active {
+      background-color: ${COLORS.TOGGLE_ON};
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background-color: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s;
+    }
+
+    .toggle-switch.active::after {
+      transform: translateX(24px);
+    }
+
+    .search-bar {
+      background-color: ${COLORS.MODULE_BACKGROUND};
+      border: none;
+      border-radius: 20px;
+      color: ${COLORS.TEXT};
+      font-size: 16px;
+      padding: 10px 20px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .search-bar::placeholder {
+      color: ${COLORS.TEXT_SECONDARY};
     }
   `;
   document.head.appendChild(style);
 }
 
-export function CreateMenu() {
-  if (!isMenuOpen) {
-    isMenuOpen = true;
+function createModuleElement(module) {
+  const moduleEl = document.createElement('div');
+  moduleEl.className = 'module';
+  moduleEl.innerHTML = `
+    <img class="module-icon" src="${module.imagedata}" alt="${module.name}">
+    <div class="module-info">
+      <div class="module-name">${module.name}</div>
+      <div class="module-description">${module.description || ''}</div>
+    </div>
+    <div class="toggle-switch" id="toggle-${module.name}"></div>
+  `;
 
-    const Holder = document.createElement("div");
-    Holder.id = "SCMM";
-    Holder.classList.add(isDarkMode ? "dark-mode" : "light-mode");
+  const toggleSwitch = moduleEl.querySelector('.toggle-switch');
+  toggleSwitch.addEventListener('click', () => {
+    const isEnabled = toggleSwitch.classList.toggle('active');
+    updateModuleState(module.name, isEnabled);
+  });
 
-    const Menu = document.createElement("div");
-    Menu.classList.add("menu-container");
-    Menu.innerHTML = `
-      <div class="menu-header">
-        <img src="${LogoData}" alt="Logo">
-        <h1>Fracticle Client</h1>
-        <div class="dark-mode-switch">
-          <div class="switch-container">
-            <div class="switch-bg"></div>
-            <div class="switch-circle">
-              <div class="switch-icon">
-                <i class="fas fa-sun"></i>
-                <i class="fas fa-moon"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search for mods..." />
-      </div>
-      <div id="SCMM-MODULES" class="module-container">
-        <!-- Modules will be inserted here dynamically -->
-      </div>
-    `;
-
-    document.body.appendChild(Holder);
-    Holder.appendChild(Menu);
-
-    // Add some additional styles to the modules
-    const moduleContainer = Holder.querySelector("#SCMM-MODULES");
-
-    // Add event listener for the dark mode switch
-    const switchContainer = Holder.querySelector('.switch-container');
-    switchContainer.addEventListener('click', toggleDarkMode);
-
-    // Add event listener for the search input
-    const searchInput = Holder.querySelector('.search-input');
-    searchInput.addEventListener('input', filterModules);
-
-    createStyles();
-    SetupModules();
-  } else {
-    document.getElementById("SCMM").remove();
-    isMenuOpen = false;
-  }
+  return moduleEl;
 }
 
-function filterModules() {
-  const searchInput = document.querySelector('.search-input');
-  const searchTerm = searchInput.value.toLowerCase();
-  const modules = document.querySelectorAll('#SCMM-MODULES > *');
+function updateModuleState(moduleName, isEnabled) {
+  const moduleData = JSON.parse(localStorage.getItem('SCMM-MODS')) || [];
+  const moduleIndex = moduleData.findIndex(m => m.name === moduleName);
 
-  modules.forEach((module) => {
-    const moduleText = module.textContent.toLowerCase();
-    if (moduleText.includes(searchTerm)) {
-      module.style.display = 'block';
-    } else {
-      module.style.display = 'none';
-    }
+  if (moduleIndex !== -1) {
+    moduleData[moduleIndex].enabled = isEnabled;
+  } else {
+    moduleData.push({ name: moduleName, enabled: isEnabled });
+  }
+
+  localStorage.setItem('SCMM-MODS', JSON.stringify(moduleData));
+  // Call the module's Init function here if needed
+  // eval(`${moduleName}.Init("${moduleName}")`);
+}
+
+function filterModules(searchTerm) {
+  const modules = document.querySelectorAll('.module');
+  modules.forEach(module => {
+    const name = module.querySelector('.module-name').textContent.toLowerCase();
+    const description = module.querySelector('.module-description').textContent.toLowerCase();
+    const isVisible = name.includes(searchTerm) || description.includes(searchTerm);
+    module.style.display = isVisible ? 'flex' : 'none';
   });
+}
+
+export function CreateMenu() {
+  if (isMenuOpen) {
+    document.getElementById('SCMM').remove();
+    isMenuOpen = false;
+    return;
+  }
+
+  isMenuOpen = true;
+  createStyles();
+
+  const menuContainer = document.createElement('div');
+  menuContainer.id = 'SCMM';
+
+  const sidebar = document.createElement('div');
+  sidebar.className = 'sidebar';
+  sidebar.innerHTML = `
+    <img class="logo" src="${LogoData}" alt="Fracticle Client Logo">
+    <div class="client-name">Fracticle Client</div>
+    <input type="text" class="search-bar" placeholder="Search modules...">
+  `;
+
+  const mainContent = document.createElement('div');
+  mainContent.className = 'main-content';
+
+  menuContainer.appendChild(sidebar);
+  menuContainer.appendChild(mainContent);
+  document.body.appendChild(menuContainer);
+
+  const searchBar = sidebar.querySelector('.search-bar');
+  searchBar.addEventListener('input', (e) => filterModules(e.target.value.toLowerCase()));
+
+  const categories = [...new Set(ModulesList.map(m => m.category))];
+  categories.forEach(category => {
+    const categoryEl = document.createElement('div');
+    categoryEl.className = 'category';
+    categoryEl.textContent = category;
+    mainContent.appendChild(categoryEl);
+
+    ModulesList.filter(m => m.category === category).forEach(module => {
+      const moduleEl = createModuleElement(module);
+      mainContent.appendChild(moduleEl);
+    });
+  });
+
+  SetupModules();
 }
