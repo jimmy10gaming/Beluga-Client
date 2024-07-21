@@ -49,7 +49,7 @@ function createStyles() {
       flex-direction: column;
       padding: 30px;
       box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
-      animation: shine 3s ease-in-out infinite;
+      background: var(--menu-background);
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -59,7 +59,7 @@ function createStyles() {
       align-items: center;
       height: fit-content;
       width: 100%;
-      color: #fff;
+      color: var(--text-color);
       gap: 20px;
       margin-bottom: 20px;
     }
@@ -138,29 +138,13 @@ function createStyles() {
     }
 
     .light-mode {
-      background-color: #f0f0f0;
-    }
-
-    .light-mode .menu-container {
-      background: #f0f0f0;
-      box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .light-mode .menu-header h1 {
-      color: #000;
+      --menu-background: #f0f0f0;
+      --text-color: #000;
     }
 
     .dark-mode {
-      background-color: #333;
-    }
-
-    .dark-mode .menu-container {
-      background-color: #444;
-      box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.8);
-    }
-
-    .dark-mode .menu-header h1 {
-      color: #fff;
+      --menu-background: #444;
+      --text-color: #fff;
     }
 
     .dark-mode .switch-container {
@@ -214,7 +198,7 @@ function createStyles() {
       border-radius: 20px;
       font-size: 16px;
       background-color: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      color: var(--text-color);
       transition: background-color 0.3s ease;
     }
 
@@ -229,6 +213,40 @@ function createStyles() {
 
     .light-mode .search-input::placeholder {
       color: rgba(0, 0, 0, 0.4);
+    }
+
+    .module-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .module {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+      flex: 0 0 calc(33.33% - 20px);
+      cursor: pointer;
+    }
+
+    .module:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .module h2 {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+      color: var(--text-color);
+    }
+
+    .module p {
+      font-size: 14px;
+      margin: 0;
+      color: var(--text-color);
     }
   `;
   document.head.appendChild(style);
@@ -273,26 +291,6 @@ export function CreateMenu() {
 
     // Add some additional styles to the modules
     const moduleContainer = Holder.querySelector("#SCMM-MODULES");
-    moduleContainer.style.display = "flex";
-    moduleContainer.style.flexWrap = "wrap";
-    moduleContainer.style.justifyContent = "center";
-    moduleContainer.style.gap = "20px";
-
-    const modules = document.querySelectorAll("#SCMM-MODULES > *");
-    modules.forEach((module) => {
-      module.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
-      module.style.padding = "20px";
-      module.style.borderRadius = "10px";
-      module.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.2)";
-      module.style.transition = "transform 0.3s ease-in-out";
-      module.style.flex = "0 0 calc(33.33% - 20px)";
-      module.addEventListener("mouseover", () => {
-        module.style.transform = "scale(1.05)";
-      });
-      module.addEventListener("mouseout", () => {
-        module.style.transform = "scale(1)";
-      });
-    });
 
     // Add event listener for the dark mode switch
     const switchContainer = Holder.querySelector('.switch-container');
