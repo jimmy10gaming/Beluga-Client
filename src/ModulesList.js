@@ -5,6 +5,9 @@ import XpHudimg from "./Base64/XpHud.png";
 import MangaFontimg from "./Base64/MangaFont.png";
 import ToggleSprintimg from "./Base64/ToggleSprint.png";
 import ChatShortcutsimg from "./Base64/ChatShortcuts.png";
+import ChatShortcutsimg from "./Base64/Xray.png";
+import ChatShortcutsimg from "./Base64/blink.png";
+import ChatShortcutsimg from "./Base64/StatHUD.png";
 
 export const LogoData = Logo;
 
@@ -45,4 +48,18 @@ export const ModulesList = [
     category: "Utility",
     description: "Quick chat commands"
   },
-];
+  {
+    name: "Xray",
+    imagedata: XrayImg,
+    init: XrayInit
+}
+{
+    name: "blink",
+    imagedata: blinkImg,
+    init: blinkInit
+}
+{
+    name: "StatHUD",
+    imagedata: StatHUDImg,
+    init: StatHUDInit
+}
